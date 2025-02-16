@@ -40,10 +40,10 @@ class DynamicArray{
 			delete[] arr;
 		}
 };
-int main(){
-	
-	
-	
-	
-	return 0;
+int main() {
+    DynamicArray d(5);
+    DynamicArray d1(move(d));
+    d1.resize(10);
+    d1.display();
+    return 0;
 }
