@@ -46,6 +46,10 @@ public:
     virtual double calculateinterest(){
         return 0.0;
     }
+    
+    static int getTotalAccounts() {
+        return count;
+    }
 };
 
 int Account::count = 0;
@@ -116,5 +120,41 @@ public:
 };
 
 int main(){
+  
+    SavingsAccount sa("John Doe", 1001, "Savings", 0.05, 500);
+    CheckingAccount ca("Jane Smith", 1002, "Checking");
+    FixedDepositAccount fda("Bob Johnson", 1003, "Fixed Deposit", "2025-12-31", 0.08);
+    
+   
+    Account* accounts[] = {&sa, &ca, &fda};
+  
+    cout << "\n=== Depositing money ===\n";
+    for(Account* acc : accounts){
+        acc->deposit_amount(2000);
+    }
+    
+  
+    cout << "\n=== Withdrawing money ===\n";
+    accounts[0]->withdraw_amount(1000);  
+    accounts[1]->withdraw_amount(2500);  
+    accounts[2]->withdraw_amount(500);   
+    
+ 
+    cout << "\n=== Calculating interest ===\n";
+    for(Account* acc : accounts){
+        cout << "Interest for account " << acc->get_balance() << ": " 
+             << acc->calculateinterest() << endl;
+    }
+    
+
+    cout << "\n=== Account Information ===\n";
+    for(Account* acc : accounts){
+        acc->get_accountinfo();
+        acc->printstatement();
+        cout << "-----------------------\n";
+    }
+    
+    cout << "\nTotal accounts created: " << Account::getTotalAccounts() << endl;
+    
     return 0;
 }
